@@ -114,7 +114,9 @@ def find(board, word):
     num_list = [0, 1, 2, 3, 4]
 
     def check_next(position, word):
-        """Checks current position for letter, then recursively checks neighbors"""
+        """Checks current position for letter, then recursively checks neighbors.
+        If on last letter of word, and position is that letter, returns True.
+        """
         x, y = position
 
         if x not in num_list or y not in num_list:
@@ -124,7 +126,8 @@ def find(board, word):
                 return True
             else:
                 used_set.add(position)
-                neighbor_list = [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
+                neighbor_list = [(x+1, y), (x-1, y), (x, y+1), (x, y-1), 
+                                 (x+1, y+1), (x-1, y+1). (x-1, y+1), (x-1, y-1)]
                 for i in range(len(neighbor_list)):
                     if neighbor_list[i] not in used_set:
                         if check_next(neighbor_list[i], word[1:]) is True:
@@ -134,8 +137,8 @@ def find(board, word):
                 else:
                     used_set.remove(position)
                     return False
-        else:
-            return False
+
+        return False
 
     for horizonal in range(len(board)):
         for vertical in range(len(board[0])):
